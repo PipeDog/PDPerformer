@@ -21,6 +21,8 @@
     
     [self test];
     [self test1];
+    [self test2];
+    [self test3];
 }
 
 - (void)test {
@@ -41,5 +43,25 @@
     }
 }
 
+- (void)test2 {
+    NSLog(@"----- test2 -----");
+    for (NSInteger i = 0; i < 10; i ++) {
+        [PDPerformer performTailHandler:^{
+            NSLog(@"=== i = %zd", i);
+        } forKey:NSStringFromSelector(_cmd) inSeconds:2];
+    }
+}
+
+- (void)test3 {
+    NSLog(@"----- test3 -----");
+
+    for (NSInteger i = 0; i < 10; i ++) {
+        sleep(0.5);
+        
+        [PDPerformer performTailHandler:^{
+            NSLog(@"**** i = %zd", i);
+        } forKey:NSStringFromSelector(_cmd) inSeconds:10];
+    }
+}
 
 @end
