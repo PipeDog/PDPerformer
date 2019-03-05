@@ -10,13 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PDPerformer : NSObject
+@protocol PDPerformerProtocol <NSObject>
 
+@optional
 // The implementation method can only execute a limited number of times in a specified period of time.
 + (void)perform:(dispatch_block_t)block forKey:(NSString *)key limits:(NSUInteger)limits inSeconds:(NSTimeInterval)secs;
 
 // The implementation method executes only the last time in a specified amount of time.
 + (void)performTailHandler:(dispatch_block_t)block forKey:(NSString *)key inSeconds:(NSTimeInterval)secs;
+
+@end
+
+@interface PDPerformer : NSObject <PDPerformerProtocol>
 
 @end
 

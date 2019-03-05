@@ -15,17 +15,14 @@
 #define TailLock() dispatch_semaphore_wait(self.tailLock, DISPATCH_TIME_FOREVER)
 #define TailUnlock() dispatch_semaphore_signal(self.tailLock)
 
-@interface PDPerformer ()
+@interface PDPerformer (LimitCount)
 
 @property (class, strong, readonly) NSMutableDictionary<NSString *, NSMutableDictionary *> *handlers;
 @property (class, strong, readonly) dispatch_semaphore_t lock;
 
-@property (class, strong, readonly) NSMutableDictionary<NSString *, dispatch_block_t> *tailHandlers;
-@property (class, strong, readonly) dispatch_semaphore_t tailLock;
-
 @end
 
-@implementation PDPerformer
+@implementation PDPerformer (LimitCount)
 
 + (void)perform:(dispatch_block_t)block forKey:(NSString *)key limits:(NSUInteger)limits inSeconds:(NSTimeInterval)secs {
     NSAssert(key != nil, @"Param key cannot be nil");
@@ -71,7 +68,36 @@
     }
 }
 
-#pragma mark - Perform Last Invoke
+#pragma mark - Getter Methods
++ (NSMutableDictionary<NSString *,NSMutableDictionary *> *)handlers {
+    static NSMutableDictionary *_handlers = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _handlers = [NSMutableDictionary dictionary];
+    });
+    return _handlers;
+}
+
++ (dispatch_semaphore_t)lock {
+    static dispatch_semaphore_t _lock;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _lock = dispatch_semaphore_create(1);
+    });
+    return _lock;
+}
+
+@end
+
+@interface PDPerformer (TailPerform)
+
+@property (class, strong, readonly) NSMutableDictionary<NSString *, dispatch_block_t> *tailHandlers;
+@property (class, strong, readonly) dispatch_semaphore_t tailLock;
+
+@end
+
+@implementation PDPerformer (TailPerform)
+
 + (void)performTailHandler:(dispatch_block_t)block forKey:(NSString *)key inSeconds:(NSTimeInterval)secs {
     NSAssert(key != nil, @"Param key cannot be nil");
     
@@ -93,24 +119,6 @@
 }
 
 #pragma mark - Getter Methods
-+ (NSMutableDictionary<NSString *,NSMutableDictionary *> *)handlers {
-    static NSMutableDictionary *_handlers = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _handlers = [NSMutableDictionary dictionary];
-    });
-    return _handlers;
-}
-
-+ (dispatch_semaphore_t)lock {
-    static dispatch_semaphore_t _lock;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _lock = dispatch_semaphore_create(1);
-    });
-    return _lock;
-}
-
 + (NSMutableDictionary<NSString *,dispatch_block_t> *)tailHandlers {
     static NSMutableDictionary *_tailHandlers = nil;
     static dispatch_once_t onceToken;
@@ -128,5 +136,9 @@
     });
     return _tailLock;
 }
+
+@end
+
+@implementation PDPerformer
 
 @end
