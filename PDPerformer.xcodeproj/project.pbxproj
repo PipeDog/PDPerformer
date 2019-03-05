@@ -15,6 +15,7 @@
 		EC9B272C222E584300B9FAB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9B272B222E584300B9FAB3 /* main.m */; };
 		EC9B2736222E584400B9FAB3 /* PDPerformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9B2735222E584400B9FAB3 /* PDPerformerTests.m */; };
 		EC9B2741222E584400B9FAB3 /* PDPerformerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9B2740222E584400B9FAB3 /* PDPerformerUITests.m */; };
+		EC9B2751222E586000B9FAB3 /* PDPerformer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC9B2750222E586000B9FAB3 /* PDPerformer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		EC9B273C222E584400B9FAB3 /* PDPerformerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PDPerformerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC9B2740222E584400B9FAB3 /* PDPerformerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDPerformerUITests.m; sourceTree = "<group>"; };
 		EC9B2742222E584400B9FAB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC9B274F222E586000B9FAB3 /* PDPerformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDPerformer.h; sourceTree = "<group>"; };
+		EC9B2750222E586000B9FAB3 /* PDPerformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDPerformer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,7 @@
 		EC9B271B222E584000B9FAB3 /* PDPerformer */ = {
 			isa = PBXGroup;
 			children = (
+				EC9B274E222E585000B9FAB3 /* Source */,
 				EC9B271C222E584000B9FAB3 /* AppDelegate.h */,
 				EC9B271D222E584000B9FAB3 /* AppDelegate.m */,
 				EC9B271F222E584000B9FAB3 /* ViewController.h */,
@@ -130,6 +134,15 @@
 				EC9B2742222E584400B9FAB3 /* Info.plist */,
 			);
 			path = PDPerformerUITests;
+			sourceTree = "<group>";
+		};
+		EC9B274E222E585000B9FAB3 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				EC9B274F222E586000B9FAB3 /* PDPerformer.h */,
+				EC9B2750222E586000B9FAB3 /* PDPerformer.m */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +277,7 @@
 			files = (
 				EC9B2721222E584000B9FAB3 /* ViewController.m in Sources */,
 				EC9B272C222E584300B9FAB3 /* main.m in Sources */,
+				EC9B2751222E586000B9FAB3 /* PDPerformer.m in Sources */,
 				EC9B271E222E584000B9FAB3 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
